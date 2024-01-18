@@ -1,0 +1,27 @@
+name: ci
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - "main"
+      - "prod"
+    tags:
+      - "*"
+  workflow_dispatch:
+  schedule:
+    - cron: '20 7 * * *'
+
+
+jobs:
+  update-prod-pr:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: eniblock/build/actions/setup@develop
+    - uses: peter-evans/create-pull-request@v5
+      with:
+        branch: prod-pr
+        base: prod
+        title: Update prod
+        body: Update the production environment
