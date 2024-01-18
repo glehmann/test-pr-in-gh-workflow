@@ -18,10 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     if: github.ref == 'refs/heads/main'
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - uses: actions/checkout@v3
     - uses: peterjgrainger/action-create-branch@v2.2.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         branch: prod-pr
+    - run: gh pr create -B prod -H prod-pr --title 'Merge develop into prod' --body 'Created by Github action'
