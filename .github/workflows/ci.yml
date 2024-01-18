@@ -24,3 +24,5 @@ jobs:
         gh pr create -B prod -H prod-pr --title 'Merge develop into prod' --body 'Created by Github action'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+        pull-requests: write
