@@ -22,7 +22,6 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - uses: actions/checkout@v3
-    - uses: peterjgrainger/action-create-branch@v2.2.0
-      with:
-        branch: prod-pr
+    - run: git checkout -B prod-pr
+    - run: git push --force origin prod-pr
     - run: gh pr create -B prod -H prod-pr --title 'Merge develop into prod' --body 'Created by Github action'
