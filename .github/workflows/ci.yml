@@ -20,6 +20,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: git show --name-only
+    - run: git fetch
     - run: git show --name-only origin/prod
     - uses: peter-evans/create-pull-request@v5
       with:
