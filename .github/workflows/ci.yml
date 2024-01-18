@@ -24,4 +24,4 @@ jobs:
     - uses: actions/checkout@v3
     - run: git checkout -B prod-pr
     - run: git push --force origin prod-pr
-    - run: gh pr view prod-pr --json number || gh pr create -B prod -H prod-pr --title 'deploy the prod environment' --body 'Please review carefully!'
+    - run: (gh pr view prod-pr --json state | grep OPEN) || gh pr create -B prod -H prod-pr --title 'deploy the prod environment' --body 'Please review carefully!'
