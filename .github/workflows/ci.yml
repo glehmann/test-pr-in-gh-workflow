@@ -21,6 +21,7 @@ jobs:
     - uses: actions/checkout@v3
     - run: |
         git checkout -B prod-pr
+        git push --force origin prod-pr
         gh pr create -B prod -H prod-pr --title 'Merge develop into prod' --body 'Created by Github action'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
